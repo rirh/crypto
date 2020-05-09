@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "温城说",
+    "navigationBarBackgroundColor": "#f4f4f4",
+    "backgroundColor": "#f4f4f4"
+  },
+  "usingComponents": {}
+}
