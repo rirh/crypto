@@ -202,6 +202,7 @@ var host = 'http://127.0.0.1:8000';var _default =
 {
   onLoad: function onLoad() {
     this.get_list();
+    this.merge_list();
   },
   // onPullDownRefresh() {
   // 	this.get_list();
@@ -240,20 +241,25 @@ var host = 'http://127.0.0.1:8000';var _default =
       uni.vibrateShort();
     },
     merge_list: function merge_list() {
-      uni.connectSocket({
-        url: 'wss://www.example.com/socket',
-        data: function data() {
-          return {
-            x: '',
-            y: '' };
+      var socketTask = uni.connectSocket({
+        url: 'wss://real.okex.com:8443/ws/v3', //仅为示例，并非真实接口地址。
+        complete: function complete() {} });
 
-        },
-        header: {
-          'content-type': 'application/json' },
+      uni.onSocketOpen(function (res) {
+        console.log('WebSocket连接已打开！');
+        uni.sendSocketMessage({
+          data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] } });
 
-        protocols: ['protocol1'],
-        method: 'GET' });
-
+      });
+      uni.onSocketError(function (res) {
+        console.log('WebSocket连接打开失败，请检查！');
+      });
+      uni.onSocketMessage(function (res) {
+        console.log(res.data);
+        // uni.sendSocketMessage({
+        // 	data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] }
+        // });
+      });
     },
     get_list: function get_list() {var _this = this;
       uni.showLoading({

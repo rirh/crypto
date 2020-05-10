@@ -37,6 +37,7 @@ const host = 'http://127.0.0.1:8000';
 export default {
 	onLoad() {
 		this.get_list();
+		this.merge_list();
 	},
 	// onPullDownRefresh() {
 	// 	this.get_list();
@@ -75,19 +76,24 @@ export default {
 			uni.vibrateShort();
 		},
 		merge_list() {
-			uni.connectSocket({
-				url: 'wss://www.example.com/socket',
-				data() {
-					return {
-						x: '',
-						y: ''
-					};
-				},
-				header: {
-					'content-type': 'application/json'
-				},
-				protocols: ['protocol1'],
-				method: 'GET'
+			var socketTask = uni.connectSocket({
+				url: 'wss://real.okex.com:8443/ws/v3', //仅为示例，并非真实接口地址。
+				complete: () => {}
+			});
+			uni.onSocketOpen(function(res) {
+				console.log('WebSocket连接已打开！');
+				uni.sendSocketMessage({
+					data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] }
+				});
+			});
+			uni.onSocketError(function(res) {
+				console.log('WebSocket连接打开失败，请检查！');
+			});
+			uni.onSocketMessage(function(res) {
+				console.log((res.data));
+				// uni.sendSocketMessage({
+				// 	data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] }
+				// });
 			});
 		},
 		get_list() {
