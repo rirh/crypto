@@ -4,7 +4,7 @@
 			<view class="item" :class="{ active: cur === quote }" v-for="(k, quote) in cryptos" @click="handle_change_quote(quote)" :key="quote">{{ quote }}</view>
 		</view>
 		<view class="list">
-			<view class="item" v-for="crypto in list" :key="crypto.instrument_id">
+			<view class="item" @click="handle_detail" v-for="crypto in list" :key="crypto.instrument_id">
 				<view class="flex-sub">
 					<view>
 						<text class="base">{{ crypto.instrument_id.split('-')[0] }}</text>
@@ -20,6 +20,8 @@
 					</view>
 					<view class="usd">
 						<text>${{ to2Fixed(crypto.last * btc.last) }}</text>
+						<text class="calory">10C</text>
+						
 					</view>
 				</view>
 				<view class="flex-sub ptc">
@@ -75,6 +77,11 @@ export default {
 			this.cur = quote;
 			uni.vibrateShort();
 		},
+		handle_detail(){
+			uni.navigateTo({
+				url:'./crypto-detail/crypto-detail',
+			})
+		},
 		merge_list() {
 			var socketTask = uni.connectSocket({
 				url: 'wss://real.okex.com:8443/ws/v3', //仅为示例，并非真实接口地址。
@@ -90,7 +97,7 @@ export default {
 				console.log('WebSocket连接打开失败，请检查！');
 			});
 			uni.onSocketMessage(function(res) {
-				console.log((res.data));
+				console.log(res.data);
 				// uni.sendSocketMessage({
 				// 	data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] }
 				// });
@@ -205,7 +212,8 @@ $color-color-white: white;
 			font-size: $text-xl;
 			color: $color-text-title;
 		}
-		.quote {
+		.quote,
+		.calory {
 			font-size: $text-sm;
 			color: $color-text-less;
 			margin-left: 10rpx;

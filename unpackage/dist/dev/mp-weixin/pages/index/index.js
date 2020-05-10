@@ -195,6 +195,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 // const host = 'https://crypto.huzhihui.org.cn';
 var host = 'http://127.0.0.1:8000';var _default =
@@ -239,6 +241,11 @@ var host = 'http://127.0.0.1:8000';var _default =
     handle_change_quote: function handle_change_quote(quote) {
       this.cur = quote;
       uni.vibrateShort();
+    },
+    handle_detail: function handle_detail() {
+      uni.navigateTo({
+        url: './crypto-detail/crypto-detail' });
+
     },
     merge_list: function merge_list() {
       var socketTask = uni.connectSocket({

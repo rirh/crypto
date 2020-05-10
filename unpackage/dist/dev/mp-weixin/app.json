@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/index/crypto-detail/crypto-detail"
   ],
   "subPackages": [],
   "window": {
@@ -9,6 +10,5 @@
     "navigationBarBackgroundColor": "#f4f4f4",
     "backgroundColor": "#f4f4f4"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap43.json"
+  "usingComponents": {}
 }

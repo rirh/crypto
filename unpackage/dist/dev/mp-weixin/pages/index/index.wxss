@@ -114,7 +114,8 @@ page.data-v-f5c8e6d2 {
   font-size: 28rpx;
   color: #000;
 }
-.list .item .quote.data-v-f5c8e6d2 {
+.list .item .quote.data-v-f5c8e6d2,
+.list .item .calory.data-v-f5c8e6d2 {
   font-size: 20rpx;
   color: #999;
   margin-left: 10rpx;
