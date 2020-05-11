@@ -12,7 +12,8 @@
 			}
 		},
 		onLoad(params) {
-			this.data = params
+			console.log(params.instrument_id);
+			this.data = params.instrument_id
 		},
 		methods: {
 			

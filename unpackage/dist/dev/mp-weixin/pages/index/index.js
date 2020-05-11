@@ -196,7 +196,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 // const host = 'https://crypto.huzhihui.org.cn';
 var host = 'http://127.0.0.1:8000';var _default =
@@ -242,9 +241,9 @@ var host = 'http://127.0.0.1:8000';var _default =
       this.cur = quote;
       uni.vibrateShort();
     },
-    handle_detail: function handle_detail() {
+    handle_detail: function handle_detail(_ref2) {var instrument_id = _ref2.instrument_id;
       uni.navigateTo({
-        url: './crypto-detail/crypto-detail' });
+        url: "/pages/index/crypto-detail/crypto-detail?instrument_id=".concat(instrument_id) });
 
     },
     merge_list: function merge_list() {
@@ -277,7 +276,7 @@ var host = 'http://127.0.0.1:8000';var _default =
         // url: 'https://www.btcalory.com/api/512334D90902F08B/timer/',
         method: 'GET',
         // data: { user: '4225417A1091368B', language: 'CN', logId: 1588295682897, refresh: '', exchange: '', account: '', symbol: '', brief: '', t_type: '' },
-        success: function success(_ref2) {var statusCode = _ref2.statusCode,data = _ref2.data;
+        success: function success(_ref3) {var statusCode = _ref3.statusCode,data = _ref3.data;
           uni.hideLoading();
           if (statusCode === 200) {
             _this.show = true;

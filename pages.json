@@ -6,18 +6,19 @@
 			"style": {
 				"navigationBarTitleText": "行情",
 				"navigationBarBackgroundColor": "#f4f4f4"
-				
+
 				// "enablePullDownRefresh": true
 			}
 		}
 
-	    ,{
-            "path" : "pages/index/crypto-detail/crypto-detail",
-            "style" : {
-				"navigationBarTitleText": "详情"
+		, {
+			"path": "pages/index/crypto-detail/crypto-detail",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"navigationStyle": "custom"
 			}
-        }
-    ],
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "温城说",

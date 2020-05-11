@@ -8532,7 +8532,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "行情", "navigationBarBackgroundColor": "#f4f4f4", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/crypto-detail/crypto-detail": { "navigationBarTitleText": "详情", "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "温城说", "navigationBarBackgroundColor": "#f4f4f4", "backgroundColor": "#f4f4f4" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "行情", "navigationBarBackgroundColor": "#f4f4f4", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/index/crypto-detail/crypto-detail": { "navigationBarTitleText": "详情", "navigationStyle": "custom", "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "温城说", "navigationBarBackgroundColor": "#f4f4f4", "backgroundColor": "#f4f4f4" } };exports.default = _default;
 
 /***/ }),
 /* 8 */

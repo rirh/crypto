@@ -4,7 +4,7 @@
 			<view class="item" :class="{ active: cur === quote }" v-for="(k, quote) in cryptos" @click="handle_change_quote(quote)" :key="quote">{{ quote }}</view>
 		</view>
 		<view class="list">
-			<view class="item" @click="handle_detail" v-for="crypto in list" :key="crypto.instrument_id">
+			<view class="item" @click="handle_detail(crypto)" v-for="crypto in list" :key="crypto.instrument_id">
 				<view class="flex-sub">
 					<view>
 						<text class="base">{{ crypto.instrument_id.split('-')[0] }}</text>
@@ -21,7 +21,6 @@
 					<view class="usd">
 						<text>${{ to2Fixed(crypto.last * btc.last) }}</text>
 						<text class="calory">10C</text>
-						
 					</view>
 				</view>
 				<view class="flex-sub ptc">
@@ -77,10 +76,10 @@ export default {
 			this.cur = quote;
 			uni.vibrateShort();
 		},
-		handle_detail(){
+		handle_detail({ instrument_id }) {
 			uni.navigateTo({
-				url:'./crypto-detail/crypto-detail',
-			})
+				url: `/pages/index/crypto-detail/crypto-detail?instrument_id=${instrument_id}`
+			});
 		},
 		merge_list() {
 			var socketTask = uni.connectSocket({
