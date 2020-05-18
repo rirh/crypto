@@ -20,7 +20,7 @@
 					</view>
 					<view class="usd">
 						<text>${{ to2Fixed(crypto.last * btc.last) }}</text>
-						<text class="calory">10C</text>
+						<text class="calory">10 C</text>
 					</view>
 				</view>
 				<view class="flex-sub ptc">
@@ -28,13 +28,13 @@
 				</view>
 			</view>
 		</view>
+		<canvas></canvas>
 	</view>
 </template>
 
 <script>
-// const host = 'https://crypto.huzhihui.org.cn';
-const host = 'http://127.0.0.1:8000';
-
+import config from 'config';
+import pako from 'pako';
 export default {
 	onLoad() {
 		this.get_list();
@@ -84,30 +84,40 @@ export default {
 		merge_list() {
 			var socketTask = uni.connectSocket({
 				url: 'wss://real.okex.com:8443/ws/v3', //仅为示例，并非真实接口地址。
+				// url: 'wss://api-aws.huobi.pro/ws', //仅为示例，并非真实接口地址。
 				complete: () => {}
 			});
 			uni.onSocketOpen(function(res) {
 				console.log('WebSocket连接已打开！');
 				uni.sendSocketMessage({
 					data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] }
+					// data: { ping: Date.now() }
 				});
 			});
 			uni.onSocketError(function(res) {
 				console.log('WebSocket连接打开失败，请检查！');
 			});
-			uni.onSocketMessage(function(res) {
-				console.log(res.data);
-				// uni.sendSocketMessage({
-				// 	data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] }
-				// });
+			uni.onSocketMessage(res => {
+				console.log(res);
+				console.log(pako);
+				// let text = pako.inflate(res.data);
+				// let msg = JSON.parse(text);
+				// console.log(text);
+				// var enc = new TextDecoder('utf-8');
+				// var res = JSON.parse(new Uint8Array(res.data)); //转化成json对象
+				// console.log(res);
 			});
+			// uni.sendSocketMessage({
+			// 	data: { op: 'subscribe', args: ['spot/ticker:ETH-USDT', 'spot/ticker:EOS-USDT'] }
+			// });
 		},
-		get_list() {
+		async get_list() {
 			uni.showLoading({
-				title: '加载中...'
+				mask: true,
+				title: 'loading'
 			});
 			uni.request({
-				url: `${host}/app/get_ticker/`,
+				url: `${config.host}/app/get_all_ticker/`,
 				// url: 'https://www.btcalory.com/api/512334D90902F08B/timer/',
 				method: 'GET',
 				// data: { user: '4225417A1091368B', language: 'CN', logId: 1588295682897, refresh: '', exchange: '', account: '', symbol: '', brief: '', t_type: '' },
@@ -135,27 +145,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media (prefers-color-scheme: dark) {
-	.page {
-		background-color: #1b1c1e;
-		color: white;
-	}
-}
 page {
 	position: absolute;
-	background-color: #f4f4f4;
+	background-color: $color-bg;
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-$text-xl: 28rpx;
-$text-ml: 24rpx;
-$text-sm: 20rpx;
-$color-bg: #f4f4f4;
-$color-green: #2d8cf0;
-$color-red: #ed4014;
-$color-text-title: #000;
-$color-text-sub: #666;
-$color-text-less: #999;
-$color-color-white: white;
 
 .wapper {
 	position: fixed;
@@ -165,6 +159,7 @@ $color-color-white: white;
 	width: 100%;
 	top: 0;
 	overflow: hidden;
+	background-color: $color-bg;
 }
 .header {
 	display: flex;
@@ -175,6 +170,7 @@ $color-color-white: white;
 	overflow-y: scroll;
 	width: 750rpx;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	background-color: $color-bg;
 
 	.item {
 		margin: 0 5rpx;

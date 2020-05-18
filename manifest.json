@@ -53,7 +53,7 @@
             },
             /* ios打包配置 */
             "ios" : {
-				
+				"UIUserInterfaceStyle": "Automatic"
 			},
             /* SDK配置 */
             "sdkConfigs" : {}

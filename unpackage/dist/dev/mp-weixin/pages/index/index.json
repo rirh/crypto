@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "行情",
-  "navigationBarBackgroundColor": "#f4f4f4",
+  "navigationBarBackgroundColor": "#1b1c1e",
+  "backgroundColor": "#1b1c1e",
   "usingComponents": {}
 }

@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "moment": "^2.25.3",
+    "pako": "^1.0.11"
   }
 }

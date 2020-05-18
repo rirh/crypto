@@ -5,11 +5,10 @@
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "温城说",
-    "navigationBarBackgroundColor": "#f4f4f4",
-    "backgroundColor": "#f4f4f4"
+    "navigationBarBackgroundColor": "#1b1c1e",
+    "backgroundColor": "#1b1c1e"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap25.json"
+  "usingComponents": {}
 }

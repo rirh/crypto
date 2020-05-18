@@ -12,7 +12,6 @@
  * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
  */
 /* 颜色变量 */
-/* 行为相关颜色 */
 /* 文字基本颜色 */
 /* 背景颜色 */
 /* 边框颜色 */
@@ -24,15 +23,9 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-@media (prefers-color-scheme: dark) {
-.page.data-v-f5c8e6d2 {
-    background-color: #1b1c1e;
-    color: white;
-}
-}
 page.data-v-f5c8e6d2 {
   position: absolute;
-  background-color: #f4f4f4;
+  background-color: #1b1c1e;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .wapper.data-v-f5c8e6d2 {
@@ -48,6 +41,7 @@ page.data-v-f5c8e6d2 {
   width: 100%;
   top: 0;
   overflow: hidden;
+  background-color: #1b1c1e;
 }
 .header.data-v-f5c8e6d2 {
   display: -webkit-box;
@@ -64,10 +58,11 @@ page.data-v-f5c8e6d2 {
   overflow-y: scroll;
   width: 750rpx;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #1b1c1e;
 }
 .header .item.data-v-f5c8e6d2 {
   margin: 0 5rpx;
-  color: #666;
+  color: #c6c6c6;
   height: 80rpx;
   font-size: 28rpx;
   display: -webkit-box;
@@ -112,26 +107,26 @@ page.data-v-f5c8e6d2 {
 .list .item .base.data-v-f5c8e6d2 {
   font-weight: bold;
   font-size: 28rpx;
-  color: #000;
+  color: #fff;
 }
 .list .item .quote.data-v-f5c8e6d2,
 .list .item .calory.data-v-f5c8e6d2 {
   font-size: 20rpx;
-  color: #999;
+  color: #f4f4f4;
   margin-left: 10rpx;
 }
 .list .item .base_volume_24h.data-v-f5c8e6d2 {
   font-size: 20rpx;
-  color: #999;
+  color: #f4f4f4;
 }
 .list .item .last.data-v-f5c8e6d2 {
   font-weight: bold;
   font-size: 28rpx;
-  color: #000;
+  color: #fff;
 }
 .list .item .usd.data-v-f5c8e6d2 {
   font-size: 24rpx;
-  color: #999;
+  color: #f4f4f4;
 }
 .list .item .ptc.data-v-f5c8e6d2 {
   display: -webkit-box;
