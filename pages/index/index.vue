@@ -1,9 +1,15 @@
 <template>
 	<view class="wapper" v-if="show">
+		<view class="cu-bar search ">
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<input v-model="filter" @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="input crypto or instrument" confirm-type="search" />
+			</view>
+		</view>
 		<view class="header">
 			<view class="item" :class="{ active: cur === quote }" v-for="(k, quote) in cryptos" @click="handle_change_quote(quote)" :key="quote">{{ quote }}</view>
 		</view>
-		<view class="list">
+		<scroll-view class="list" scroll-with-animation scroll-y>
 			<view class="item" @click="handle_detail(crypto)" v-for="crypto in list" :key="crypto.instrument_id">
 				<view class="flex-sub">
 					<view>
@@ -27,8 +33,7 @@
 					<text :style="{ 'background-color': ((crypto.last - crypto.open_24h) / crypto.open_24h) * 100 > 0 ? '#2d8cf0' : '#ed4014' }" class="pr">{{ ptc(crypto) }}</text>
 				</view>
 			</view>
-		</view>
-		<canvas></canvas>
+		</scroll-view>
 	</view>
 </template>
 
@@ -45,7 +50,15 @@ export default {
 	// },
 	computed: {
 		list() {
-			return this.cryptos[this.cur] || [];
+			let result = [];
+			if (this.filter) {
+				const list = this.cryptos[this.cur];
+				const tag = this.filter.toLocaleUpperCase();
+				result = list.filter(e => ~e.instrument_id.indexOf(tag));
+			} else {
+				result = this.cryptos[this.cur];
+			}
+			return result || [];
 		}
 	},
 	data() {
@@ -53,10 +66,18 @@ export default {
 			show: false,
 			cur: '',
 			btc: {},
-			cryptos: {}
+			cryptos: {},
+			InputBottom: 0,
+			filter: ''
 		};
 	},
 	methods: {
+		InputFocus(e) {
+			this.InputBottom = e.detail.height;
+		},
+		InputBlur(e) {
+			this.InputBottom = 0;
+		},
 		to2Fixed(e) {
 			return e.toFixed(2) || '';
 		},
@@ -68,6 +89,7 @@ export default {
 		// 		'background-color': color
 		// 	};
 		// },
+
 		ptc({ last, open_24h }) {
 			const pr = ((last - open_24h) / open_24h) * 100;
 			return `${(pr > 0 && '+') || ''}${pr.toFixed(2)}%`;
@@ -191,7 +213,7 @@ page {
 .list {
 	flex: 1;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	height: 100%;
 	.item {
 		display: flex;
 		justify-content: center;
@@ -240,6 +262,9 @@ page {
 				text-align: center;
 			}
 		}
+	}
+	.cu-bar .search-form {
+		background-color: #000 !important;
 	}
 	// padding: 10rpx 15rpx;
 	// border-bottom: 1px solid rgba(0, 0, 0, 0.1);

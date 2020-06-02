@@ -84,7 +84,7 @@ page.data-v-f5c8e6d2 {
   -webkit-flex: 1;
           flex: 1;
   overflow-x: hidden;
-  overflow-y: scroll;
+  height: 100%;
 }
 .list .item.data-v-f5c8e6d2 {
   display: -webkit-box;
@@ -141,11 +141,15 @@ page.data-v-f5c8e6d2 {
 }
 .list .item .ptc .pr.data-v-f5c8e6d2 {
   color: white;
-  border-radius: 15rpx;
+  -webkit-border-radius: 15rpx;
+          border-radius: 15rpx;
   font-weight: bold;
   font-size: 28rpx;
   padding: 13rpx 0;
   width: 150rpx;
   text-align: center;
+}
+.list .cu-bar .search-form.data-v-f5c8e6d2 {
+  background-color: #000 !important;
 }
 

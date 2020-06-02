@@ -35,6 +35,46 @@
 		<view class="flex justify-center align-center">
 			<text class="tab" @click="handle_change_active(item)" :class="{ active: item.lable === activetab }" v-for="(item, index) in tabs" :key="index">{{ item.lable }}</text>
 		</view>
+		<view class="padding-left padding-top">深度时间：{{ time_to_txt(depth.timestamp) }}</view>
+		<view class="padding flex justify-between align-center">
+			<view class="">
+				<text>买盘</text>
+				<text>数量({{ params.instrument_id && params.instrument_id.split('-')[0] }})</text>
+			</view>
+			<view class="">
+				<text>价格({{ params.instrument_id && params.instrument_id.split('-')[1] }})</text>
+			</view>
+			<view class="">
+				<text>数量({{ params.instrument_id && params.instrument_id.split('-')[0] }})</text>
+				<text>买盘</text>
+			</view>
+		</view>
+		<view class="flex padding-left padding-right padding-bottom t">
+			<view class="" style="width: 50%;">
+				<view class="flex depth" style="width: 100%;" v-for="(bid, i) in depth.bids" :key="i">
+					<view class="">
+						<text style="width: 40rpx;display: inline-block;">{{ i + 1 }}</text>
+						<text class="margin-left">{{ to_fixd(bid[1]) }}</text>
+					</view>
+					<text class="flex-sub text-right">{{ bid[0] }}</text>
+					<view class="tips ask-tips" :style="{ width: `${to_width(depth.bids, bid)}` }"></view>
+				</view>
+			</view>
+			<view class="" style="width: 50%;">
+				<view class="flex depth" style="width: 100%;" v-for="(ask, i) in depth.asks" :key="i">
+					<text class="flex-sub text-left">{{ ask[0] }}</text>
+					<view class="text-right">
+						<text class="margin-right">{{ to_fixd(ask[1]) }}</text>
+						<text style="width: 40rpx;display: inline-block;">{{ i + 1 }}</text>
+					</view>
+
+					<view class="tips bid-tips" :style="{ width: `${to_width(depth.asks, ask)}` }"></view>
+				</view>
+			</view>
+			<!-- <view class="" style="width: 50%;">
+				<view class="" v-for="(bid, j) in depth.bids" :key="j">{{ bid.toString() }}</view>
+			</vie -->
+		</view>
 		<!-- <Soket :instrument_id="params.instrument_id" /> -->
 		<!-- <Chart /> -->
 	</view>
@@ -53,16 +93,25 @@ export default {
 			baseinfo: {},
 			/**
 			 *
-		参数名	类型	    描述
-		time	String	开始时间
-		open	String	开盘价格
-		high	String	最高价格
-		low	String	最低价格
-		close	String	收盘价格
-		volume	String	交易量Ï
+				参数名	类型	    描述
+				time	String	开始时间
+				open	String	开盘价格
+				high	String	最高价格
+				low	String	最低价格
+				close	String	收盘价格
+				volume	String	交易量
 			 */
 
 			kline: [],
+			/**
+			 *
+				参数名	类型	描述
+				asks	List<String>	卖方深度
+				bids	List<String>	买方深度
+				timestamp	String	时间戳
+			 */
+			depth: {},
+
 			end: '',
 			activetab: '近1天',
 			// 时间粒度granularity必须是[60 180 300 900 1800 3600 7200 14400 21600 43200 86400 604800]中的任一值，否则请求将被拒绝。
@@ -110,6 +159,39 @@ export default {
 		this.init();
 	},
 	methods: {
+		to_fixd(e) {
+			return e;
+		},
+		to_width(list, tag) {
+			const max = Math.max(...list.map(e => e[1]));
+			console.log(max);
+			console.log(`${((tag[1] / max) * 100).toFixed(2)}%`);
+			return `${((tag[1] / max) * 100).toFixed(2)}%`;
+		},
+		time_to_txt(time) {
+			return moment(time).format('YYYY-MM-DD HH:mm:ss');
+		},
+		fetch_depth() {
+			const { instrument_id } = this.params;
+			uni.request({
+				url: `${config.host}/app/get_depth/`,
+				method: 'GET',
+				data: {
+					instrument_id,
+					size: 15
+				},
+				success: res => {
+					if (res.statusCode === 200) {
+						this.depth = res.data;
+						// setTimeout(() => {
+						this.fetch_depth();
+						// }, 1000);
+					}
+				},
+				fail: () => {},
+				complete: () => {}
+			});
+		},
 		handle_change_active(data) {
 			this.activetab = data.lable;
 			this.change_end_time();
@@ -224,6 +306,7 @@ export default {
 			this.get_specific_ticker();
 			this.switch_end();
 			this.get_kline();
+			this.fetch_depth();
 		}
 	}
 };
@@ -243,6 +326,26 @@ page {
 	}
 	.active {
 		background-color: #4d4d4d;
+	}
+	.depth {
+		font-size: $uni-font-size-base;
+		position: relative;
+		padding: 10rpx 0;
+		.tips {
+			position: absolute;
+			height: 100%;
+			top: 0;
+		}
+		.ask-tips {
+			right: 0;
+			background-color: $color-green;
+			opacity: 0.3;
+		}
+		.bid-tips {
+			left: 0;
+			background-color: $color-red;
+			opacity: 0.3;
+		}
 	}
 }
 </style>

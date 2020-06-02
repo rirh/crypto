@@ -31,8 +31,7 @@
         {
           "name": "调试",
           "query": "instrument_id=BTC-USDT",
-          "id": 0,
-          "pathName": "pages/index/crypto-detail/crypto-detail"
+          "id": 0
         }
       ]
     }
