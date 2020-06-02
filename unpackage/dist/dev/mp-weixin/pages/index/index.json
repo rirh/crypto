@@ -1,6 +1,7 @@
 {
-  "navigationBarTitleText": "行情",
+  "navigationBarTitleText": "Instant",
   "navigationBarBackgroundColor": "#1b1c1e",
   "backgroundColor": "#1b1c1e",
+  "navigationStyle": "custom",
   "usingComponents": {}
 }

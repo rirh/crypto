@@ -35,16 +35,16 @@
 		<view class="flex justify-center align-center">
 			<text class="tab" @click="handle_change_active(item)" :class="{ active: item.lable === activetab }" v-for="(item, index) in tabs" :key="index">{{ item.lable }}</text>
 		</view>
-		<view class="padding-left padding-top">深度时间：{{ time_to_txt(depth.timestamp) }}</view>
+		<view class="padding-left padding-top" style="font-size: 20rpx;">深度时间：{{ time_to_txt(depth.timestamp) }}</view>
 		<view class="padding flex justify-between align-center">
-			<view class="">
+			<view class="deep-head">
 				<text>买盘</text>
 				<text>数量({{ params.instrument_id && params.instrument_id.split('-')[0] }})</text>
 			</view>
-			<view class="">
+			<view class="deep-head">
 				<text>价格({{ params.instrument_id && params.instrument_id.split('-')[1] }})</text>
 			</view>
-			<view class="">
+			<view class="deep-head">
 				<text>数量({{ params.instrument_id && params.instrument_id.split('-')[0] }})</text>
 				<text>买盘</text>
 			</view>
@@ -327,8 +327,12 @@ page {
 	.active {
 		background-color: #4d4d4d;
 	}
+	.deep-head {
+		font-size: 25rpx;
+		font-weight: bold;
+	}
 	.depth {
-		font-size: $uni-font-size-base;
+		font-size: 24rpx;
 		position: relative;
 		padding: 10rpx 0;
 		.tips {

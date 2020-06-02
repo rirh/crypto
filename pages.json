@@ -8,14 +8,40 @@
 			"query": "instrument_id=BTC-USDT"
 		}]
 	},
+	"tabBar": {
+		"backgroundColor": "#1b1c1e",
+		"color": "#999",
+		"selectedColor": "#2d8cf0",
+		"borderStyle": "white",
+		"height": "30px",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "Instant"
+				// "iconPath": "static/tabbar/index.png",
+				// "selectedIconPath": "static/tabbar/index_selected.png"
+			}, {
+				"pagePath": "pages/trade/trade",
+				"text": "Trade"
+				// "iconPath": "static/tabbar/patient.png",
+				// "selectedIconPath": "static/tabbar/patient_selected.png"
+			},
+			{
+				"pagePath": "pages/wallet/wallet",
+				"text": "Wallet"
+				// "iconPath": "static/tabbar/message.png",
+				// "selectedIconPath": "static/tabbar/message_selected.png"
+			}
+		]
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "行情",
+				"navigationBarTitleText": "Instant",
 				"navigationBarBackgroundColor": "#1b1c1e",
-				"backgroundColor": "#1b1c1e"
+				"backgroundColor": "#1b1c1e",
+				"navigationStyle": "custom"
 
 				// "enablePullDownRefresh": true
 			}
@@ -28,6 +54,30 @@
 				"navigationBarBackgroundColor": "#1b1c1e",
 				// "navigationStyle": "custom",
 				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/trade/trade",
+			"style": {
+				"navigationBarTitleText": "Trade",
+				"navigationBarBackgroundColor": "#1b1c1e",
+				"backgroundColor": "#1b1c1e",
+				"navigationStyle": "custom"
+
+
+				// "enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/wallet/wallet",
+			"style": {
+				"navigationBarTitleText": "Wallet",
+				"navigationBarBackgroundColor": "#1b1c1e",
+				"backgroundColor": "#1b1c1e",
+				"navigationStyle": "custom"
+
+
+				// "enablePullDownRefresh": true
 			}
 		}
 
