@@ -1,13 +1,37 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/index/crypto-detail/crypto-detail",
+    "pages/trade/trade",
+    "pages/wallet/wallet"
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "温城说",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#1b1c1e",
+    "backgroundColor": "#1b1c1e"
+  },
+  "tabBar": {
+    "backgroundColor": "#1b1c1e",
+    "color": "#999",
+    "selectedColor": "#2d8cf0",
+    "borderStyle": "white",
+    "height": "30px",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "Instant"
+      },
+      {
+        "pagePath": "pages/trade/trade",
+        "text": "Trade"
+      },
+      {
+        "pagePath": "pages/wallet/wallet",
+        "text": "Wallet"
+      }
+    ]
   },
   "usingComponents": {}
 }

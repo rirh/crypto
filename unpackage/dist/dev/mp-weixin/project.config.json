@@ -11,7 +11,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.9.2",
   "appid": "wx1868b4a99a297d05",
-  "projectname": "Binance",
+  "projectname": "Crypto",
   "condition": {
     "search": {
       "current": -1,
@@ -31,7 +31,8 @@
         {
           "name": "调试",
           "query": "instrument_id=BTC-USDT",
-          "id": 0
+          "id": 0,
+          "pathName": "pages/wallet/wallet"
         }
       ]
     }

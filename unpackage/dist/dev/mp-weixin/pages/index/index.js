@@ -232,6 +232,9 @@ var _pako = _interopRequireDefault(__webpack_require__(/*! pako */ 21));function
       filter: '' };
 
   },
+  onTabItemTap: function onTabItemTap() {
+    uni.vibrateShort();
+  },
   methods: {
     InputFocus: function InputFocus(e) {
       this.InputBottom = e.detail.height;
@@ -260,6 +263,7 @@ var _pako = _interopRequireDefault(__webpack_require__(/*! pako */ 21));function
       uni.vibrateShort();
     },
     handle_detail: function handle_detail(_ref2) {var instrument_id = _ref2.instrument_id;
+      this.filter = '';
       uni.navigateTo({
         url: "/pages/index/crypto-detail/crypto-detail?instrument_id=".concat(instrument_id) });
 

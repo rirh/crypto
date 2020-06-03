@@ -1,11 +1,11 @@
 <template>
-	<view class="wapper" :style="{ 'padding-top': `${statusBarHeight-5}px` }" v-if="show">
+	<view class="wapper" :style="{ 'padding-top': `${statusBarHeight - 5}px` }" v-if="show">
 		<view class="cu-bar search ">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
-				<input v-model="filter" @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="input crypto or instrument" confirm-type="search" />
+				<input v-model="filter" @focus="InputFocus" @blur="InputBlur" :adjust-position="false" type="text" placeholder="search instrument " confirm-type="search" />
 			</view>
-			<view class="" style="width: 30%;"></view>
+			<view class="" style="width: 23vw"></view>
 		</view>
 		<view class="header">
 			<view class="item" :class="{ active: cur === quote }" v-for="(k, quote) in cryptos" @click="handle_change_quote(quote)" :key="quote">{{ quote }}</view>
@@ -76,6 +76,9 @@ export default {
 			filter: ''
 		};
 	},
+	onTabItemTap() {
+		uni.vibrateShort();
+	},
 	methods: {
 		InputFocus(e) {
 			this.InputBottom = e.detail.height;
@@ -104,6 +107,7 @@ export default {
 			uni.vibrateShort();
 		},
 		handle_detail({ instrument_id }) {
+			this.filter = '';
 			uni.navigateTo({
 				url: `/pages/index/crypto-detail/crypto-detail?instrument_id=${instrument_id}`
 			});

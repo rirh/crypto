@@ -13,6 +13,10 @@ export default {
 </script>
 
 <style lang="scss">
+page {
+	background-color: $color-bg;
+	font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
 /*每个页面公共css */
 @import 'css/main.css';
 @import 'css/icon.css';

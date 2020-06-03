@@ -38,7 +38,7 @@
 		<view class="padding-left padding-top" style="font-size: 20rpx;">深度时间：{{ time_to_txt(depth.timestamp) }}</view>
 		<view class="padding flex justify-between align-center">
 			<view class="deep-head">
-				<text>买盘</text>
+				<text>卖盘</text>
 				<text>数量({{ params.instrument_id && params.instrument_id.split('-')[0] }})</text>
 			</view>
 			<view class="deep-head">

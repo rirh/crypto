@@ -8569,8 +8569,8 @@ if (hadRuntime) {
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
   biance: 'https://api.binance.com',
-  Apikey: 'LbQcfIPYYA52k2rZ8CpUptvRGeBn8ML7lwIx5pw0dhvv8QjXTkqvSq52HmuXWcbt',
-  Secretly: '5DiHhQ86kJEDwXWiE6r2bf4w55y5mOOFLXLI0vBBpurMhbPZDMETHfeY4Vv2EDp0',
+  // Apikey: '123',
+  // Secretly: '123',
   // host: 'http://127.0.0.1:8000',
   host: 'https://crypto.huzhihui.org.cn' };exports.default = _default;
 
@@ -36166,6 +36166,32 @@ webpackContext.id = 47;
   return zhTw;
 
 });
+
+/***/ }),
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */
+/*!***************************************************!*\
+  !*** /Users/zh/Documents/blog/Binance/contant.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.get_asset_valuations = exports.get_asset_valuation = void 0;var get_asset_valuation = '0X001';exports.get_asset_valuation = get_asset_valuation;
+var get_asset_valuations = '0X002';exports.get_asset_valuations = get_asset_valuations;
 
 /***/ })
 ]]);

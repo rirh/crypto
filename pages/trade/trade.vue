@@ -11,6 +11,9 @@
 				
 			}
 		},
+		onTabItemTap() {
+			uni.vibrateShort();
+		},
 		methods: {
 			
 		}
