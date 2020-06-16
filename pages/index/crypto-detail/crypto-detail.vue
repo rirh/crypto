@@ -18,11 +18,11 @@
 			</view>
 			<view class="" style="color:#f4f4f4">
 				<view class="flex justify-between">
-					<text class="sub">高</text>
+					<text class="sub">H</text>
 					<text class="text-white margin-left">{{ baseinfo.high_24h }}</text>
 				</view>
 				<view class="flex justify-between">
-					<text class="sub">低</text>
+					<text class="sub">L</text>
 					<text class="text-white margin-left">{{ baseinfo.low_24h }}</text>
 				</view>
 				<view class="flex justify-between">
@@ -35,18 +35,18 @@
 		<view class="flex justify-center align-center">
 			<text class="tab" @click="handle_change_active(item)" :class="{ active: item.lable === activetab }" v-for="(item, index) in tabs" :key="index">{{ item.lable }}</text>
 		</view>
-		<view class="padding-left padding-top" style="font-size: 20rpx;">深度时间：{{ time_to_txt(depth.timestamp) }}</view>
+		<view class="padding-left padding-top" style="font-size: 20rpx;">Time：{{ time_to_txt(depth.timestamp) }}</view>
 		<view class="padding flex justify-between align-center">
 			<view class="deep-head">
-				<text>卖盘</text>
-				<text>数量({{ params.instrument_id && params.instrument_id.split('-')[0] }})</text>
+				<text>Bids&nbsp;</text>
+				<text class="margin-left-sm">&nbsp;({{ params.instrument_id && params.instrument_id.split('-')[0] }})&nbsp;Vol</text>
 			</view>
 			<view class="deep-head">
-				<text>价格({{ params.instrument_id && params.instrument_id.split('-')[1] }})</text>
+				<text>Price&nbsp;({{ params.instrument_id && params.instrument_id.split('-')[1] }})</text>
 			</view>
 			<view class="deep-head">
-				<text>数量({{ params.instrument_id && params.instrument_id.split('-')[0] }})</text>
-				<text>买盘</text>
+				<text>Vol&nbsp;({{ params.instrument_id && params.instrument_id.split('-')[0] }})&nbsp;</text>
+				<text class="margin-left-sm">&nbsp;Asks</text>
 			</view>
 		</view>
 		<view class="flex padding-left padding-right padding-bottom t">
@@ -56,13 +56,13 @@
 						<text style="width: 40rpx;display: inline-block;">{{ i + 1 }}</text>
 						<text class="margin-left">{{ to_fixd(bid[1]) }}</text>
 					</view>
-					<text class="flex-sub text-right">{{ bid[0] }}</text>
-					<view class="tips ask-tips" :style="{ width: `${to_width(depth.bids, bid)}` }"></view>
+					<text class="flex-sub text-right padding-right-sm">{{ bid[0] }}</text>
+					<view class="tips ask-tips " :style="{ width: `${to_width(depth.bids, bid)}` }"></view>
 				</view>
 			</view>
 			<view class="" style="width: 50%;">
 				<view class="flex depth" style="width: 100%;" v-for="(ask, i) in depth.asks" :key="i">
-					<text class="flex-sub text-left">{{ ask[0] }}</text>
+					<text class="flex-sub text-left padding-left-sm">{{ ask[0] }}</text>
 					<view class="text-right">
 						<text class="margin-right">{{ to_fixd(ask[1]) }}</text>
 						<text style="width: 40rpx;display: inline-block;">{{ i + 1 }}</text>
@@ -87,6 +87,7 @@ const { statusBarHeight } = uni.getSystemInfoSync();
 export default {
 	data() {
 		return {
+			show: false,
 			statusBarHeight,
 			granularity: 60,
 			params: {},
@@ -113,36 +114,36 @@ export default {
 			depth: {},
 
 			end: '',
-			activetab: '近1天',
+			activetab: '1 day',
 			// 时间粒度granularity必须是[60 180 300 900 1800 3600 7200 14400 21600 43200 86400 604800]中的任一值，否则请求将被拒绝。
 			// 这些值分别对应的是[1min 3min 5min 15min 30min 1hour 2hour 4hour 6hour 12hour 1day 1week]的时间段。
 			tabs: [
 				{
-					lable: '近5分',
+					lable: '5 min',
 					value: 1,
 					keyworld: 'minutes',
 					granularity: 300
 				},
 				{
-					lable: '近30分',
+					lable: '30 min',
 					value: 30,
 					keyworld: 'minutes',
 					granularity: 1800
 				},
 				{
-					lable: '近4时',
+					lable: '4 hour',
 					value: 4,
 					keyworld: 'hours',
 					granularity: 7200
 				},
 				{
-					lable: '近1天',
+					lable: '1 day',
 					value: 1,
 					keyworld: 'days',
 					granularity: 86400
 				},
 				{
-					lable: '近1周',
+					lable: '1 week',
 					value: 1,
 					keyworld: 'weeks',
 					granularity: 604800
@@ -157,6 +158,10 @@ export default {
 		});
 		this.params = params;
 		this.init();
+		this.show = true;
+	},
+	onUnload() {
+		this.show = false;
 	},
 	methods: {
 		to_fixd(e) {
@@ -184,7 +189,7 @@ export default {
 					if (res.statusCode === 200) {
 						this.depth = res.data;
 						// setTimeout(() => {
-						this.fetch_depth();
+						this.show && this.fetch_depth();
 						// }, 1000);
 					}
 				},

@@ -11,14 +11,14 @@
 			<view class="item" :class="{ active: cur === quote }" v-for="(k, quote) in cryptos" @click="handle_change_quote(quote)" :key="quote">{{ quote }}</view>
 		</view>
 		<scroll-view class="list" scroll-with-animation scroll-y>
-			<view class="item" @click="handle_detail(crypto)" v-for="crypto in list" :key="crypto.instrument_id">
+			<view v-if="list.length" class="item" @click="handle_detail(crypto)" v-for="crypto in list" :key="crypto.instrument_id">
 				<view class="flex-sub">
 					<view>
 						<text class="base">{{ crypto.instrument_id.split('-')[0] }}</text>
 						<text class="quote">/{{ crypto.instrument_id.split('-')[1] }}</text>
 					</view>
 					<view class="base_volume_24h">
-						<text>24H成交量 {{ Math.floor(crypto.base_volume_24h) }}</text>
+						<text>24H Vol {{ Math.floor(crypto.base_volume_24h) }}</text>
 					</view>
 				</view>
 				<view class="flex-sub ">
@@ -34,6 +34,7 @@
 					<text :style="{ 'background-color': ((crypto.last - crypto.open_24h) / crypto.open_24h) * 100 > 0 ? '#2d8cf0' : '#ed4014' }" class="pr">{{ ptc(crypto) }}</text>
 				</view>
 			</view>
+			<Empty v-else></Empty>
 		</scroll-view>
 	</view>
 </template>
@@ -41,7 +42,11 @@
 <script>
 import config from 'config';
 import pako from 'pako';
+import Empty from 'components/empty.vue';
 export default {
+	components: {
+		Empty
+	},
 	onLoad() {
 		this.get_list();
 		this.merge_list();

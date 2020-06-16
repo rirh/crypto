@@ -4,7 +4,7 @@
 		"list": [{
 			"name": "调试",
 			// "path": "pages/index/crypto-detail/crypto-detail",
-			"path": "pages/wallet/wallet",
+			"path": "pages/trade/trade",
 			"query": "instrument_id=BTC-USDT"
 		}]
 	},

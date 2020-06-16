@@ -3,5 +3,7 @@
   "navigationBarBackgroundColor": "#1b1c1e",
   "backgroundColor": "#1b1c1e",
   "navigationStyle": "custom",
-  "usingComponents": {}
+  "usingComponents": {
+    "empty": "/components/empty"
+  }
 }

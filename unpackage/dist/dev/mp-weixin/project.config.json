@@ -32,7 +32,7 @@
           "name": "调试",
           "query": "instrument_id=BTC-USDT",
           "id": 0,
-          "pathName": "pages/wallet/wallet"
+          "pathName": "pages/trade/trade"
         }
       ]
     }

@@ -36176,22 +36176,16 @@ webpackContext.id = 47;
 /* 185 */,
 /* 186 */,
 /* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */
-/*!***************************************************!*\
-  !*** /Users/zh/Documents/blog/Binance/contant.js ***!
-  \***************************************************/
+/* 188 */
+/*!****************************************************!*\
+  !*** /Users/zh/Documents/blog/Binance/constant.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.get_asset_valuations = exports.get_asset_valuation = void 0;var get_asset_valuation = '0X001';exports.get_asset_valuation = get_asset_valuation;
-var get_asset_valuations = '0X002';exports.get_asset_valuations = get_asset_valuations;
+Object.defineProperty(exports, "__esModule", { value: true });exports.get_position_swap = exports.get_asset_valuation = void 0;var get_asset_valuation = '0X001';exports.get_asset_valuation = get_asset_valuation;
+var get_position_swap = '0X002';exports.get_position_swap = get_position_swap;
 
 /***/ })
 ]]);

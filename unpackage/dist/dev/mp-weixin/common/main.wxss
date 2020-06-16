@@ -1251,7 +1251,6 @@ to {
 	box-sizing: border-box;
 	width: 200%;
 	height: 200%;
-	border-bottom: 1rpx solid #ddd;
 	border-radius: inherit;
 	content: " ";
 	-webkit-transform: scale(.5);
@@ -2167,10 +2166,10 @@ to {
 	border-radius: 6rpx;
 }
 /* card.dynamic>.cu-item .comment {
-  padding: 20upx;
+  padding: 20rpx;
   background-color: #f1f1f1;
-  margin: 0 30upx 30upx;
-  border-radius: 6upx;
+  margin: 0 30rpx 30rpx;
+  border-radius: 6rpx;
 } */
 .cu-card.article {
 	display: block;
