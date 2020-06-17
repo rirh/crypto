@@ -60,5 +60,7 @@ freeline/
 freeline_project_description.json
 
 # fastlane
+
 node_modules/
 unpackage/
+/unpackage
