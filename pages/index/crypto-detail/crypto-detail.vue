@@ -39,13 +39,13 @@
 		<view class="padding flex justify-between align-center">
 			<view class="deep-head">
 				<text>Bids&nbsp;</text>
-				<text class="margin-left-sm">&nbsp;({{ params.instrument_id && params.instrument_id.split('-')[0] }})&nbsp;Vol</text>
+				<text class="margin-left-sm">&nbsp;({{ params.instrument_id && `${params.instrument_id}`.split('-')[0] }})&nbsp;Vol</text>
 			</view>
 			<view class="deep-head">
-				<text>Price&nbsp;({{ params.instrument_id && params.instrument_id.split('-')[1] }})</text>
+				<text>Price&nbsp;({{ params.instrument_id && `${params.instrument_id}`.split('-')[1] }})</text>
 			</view>
 			<view class="deep-head">
-				<text>Vol&nbsp;({{ params.instrument_id && params.instrument_id.split('-')[0] }})&nbsp;</text>
+				<text>Vol&nbsp;({{ params.instrument_id && `${params.instrument_id}`.split('-')[0] }})&nbsp;</text>
 				<text class="margin-left-sm">&nbsp;Asks</text>
 			</view>
 		</view>
@@ -102,7 +102,6 @@ export default {
 				close	String	收盘价格
 				volume	String	交易量
 			 */
-
 			kline: [],
 			/**
 			 *
@@ -112,7 +111,6 @@ export default {
 				timestamp	String	时间戳
 			 */
 			depth: {},
-
 			end: '',
 			activetab: '1 day',
 			// 时间粒度granularity必须是[60 180 300 900 1800 3600 7200 14400 21600 43200 86400 604800]中的任一值，否则请求将被拒绝。
@@ -251,11 +249,9 @@ export default {
 			console.log(ctx.height, ctx.width);
 			const height = 100;
 			const { screenWidth } = uni.getSystemInfoSync();
-
 			// '#2d8cf0' : '#ed4014'
 			ctx.setStrokeStyle('#2d8cf0');
 			ctx.setShadow(1, 100, 8, '#ed4014');
-
 			// 计算最高价格
 			const max_price = Math.max(...this.kline.map(([, , e]) => e));
 			const min_price = Math.min(...this.kline.map(([, , , e]) => e));
@@ -306,7 +302,6 @@ export default {
 				}
 			});
 		},
-
 		init() {
 			this.get_specific_ticker();
 			this.switch_end();
@@ -324,7 +319,6 @@ page {
 	.sub {
 		color: $color-text-sub;
 	}
-
 	.tab {
 		padding: 10rpx 30rpx;
 		border-radius: 10rpx;

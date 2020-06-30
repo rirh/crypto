@@ -169,7 +169,7 @@ export default {
 							list[quote].push(data[i]);
 						}
 						this.cryptos = list;
-						const [quote] = Object.keys(this.cryptos);
+						const [,quote] = Object.keys(this.cryptos);
 						this.cur = quote;
 						// this.show=true
 					}

@@ -1,8 +1,8 @@
 <template>
-	<view class="flex justify-between padding">
-		<text>{{ account.currency }}</text>
-		<text>{{ account.available }}</text>
-		<text>{{ account.frozen }}</text>
+	<view class="flex padding">
+		<text style="width: 30%;">{{ account.currency }}</text>
+		<text style="width: 40%;text-align: center;">{{ account.available }}</text>
+		<text style="width: 30%;text-align: right;">{{ account.frozen }}</text>
 	</view>
 </template>
 
