@@ -1,20 +1,29 @@
 <template>
 	<view>
-		<view class="wallet " :style="{ 'padding-top': `${statusBarHeight - 5}px` }">
+		<view v-if="userInfo" class="wallet " :style="{ 'padding-top': `${statusBarHeight - 5}px` }">
 			<view class="padding flex justify-start align-center text-white text-xxl text-bold">
 				<text @click="secret = !secret" :class="secret ? 'cuIcon-attentionforbidfill' : 'cuIcon-attentionfill'"></text>
 			</view>
-			<view class="padding-left padding-right padding-bottom">
+			<view class="padding-left padding-right padding-bottom ">
 				<view class="">
 					<text class="text-sm " style="color: #c6c6c6;">总账户资产折合({{ wallet.valuation_currency || blan.valuation_currency }})</text>
 				</view>
-				<view class="margin-top-xs">
-					<text class="text-xl text-white ">
-						{{ secret ? '********' : wallet.balance || blan.balance }}&nbsp;{{ secret ? '***' : wallet.valuation_currency || blan.valuation_currency }}
-					</text>
+				<view class="margin-top-xs flex justify-center align-center">
+					<view class="">
+						<text @click="login" class="text-xl text-white ">
+							{{ secret ? '********' : wallet.balance || blan.balance }}&nbsp;{{ secret ? '***' : wallet.valuation_currency || blan.valuation_currency }}
+						</text>
+					</view>
+					<view class="text-white flex justify-end flex-sub align-center">
+						<!-- <text>{{userInfo.userInfo.nickName}}</text> -->
+						<image style="border-radius: 5px;border: 1rpx solid #fff;" class="cu-avatar margin-left" :src="userInfo.userInfo.avatarUrl" mode="scaleToFill"></image>
+					</view>
 				</view>
 				<!-- <view class="margin-top"><button class="cu-btn bg-gradual-orange">划转</button></view> -->
 			</view>
+		</view>
+		<view v-if="!userInfo" :style="{ 'padding-top': `${statusBarHeight}px` }" class="flex justify-center align-center padding">
+			<button style="width: 100%;" class="cu-btn bg-grey lg" open-type="getUserInfo" @getuserinfo="handle_login">登录</button>
 		</view>
 		<scroll-view scroll-with-animation scroll-x class="bar padding">
 			<text
@@ -36,23 +45,28 @@
 				</view>
 				<view v-for="(account, i) in account_info" :key="i"><Account :account="account"></Account></view>
 			</view>
-			<view v-else-if="cursor === 9" class="padding text-white" :key="j" v-for="(swap, j) in account_info.info"><Swap :swap="swap"></Swap></view>
+			<view v-else-if="cursor === 9" class="padding text-white" :key="j" v-for="(swap, j) in swap_account"><Swap :swap="swap"></Swap></view>
+			<view v-else-if="cursor === 16" class="padding text-white" :key="k" v-for="(swap, k) in swap_usdt_account"><SwapUsdt :swap="swap"></SwapUsdt></view>
 		</scroll-view>
 	</view>
 </template>
 
 <script>
 import config from 'config';
-import { get_asset_valuation } from 'constant';
+import { get_asset_valuation, get_wx_user_info } from 'constant';
 import Swap from './Swap.vue';
+import SwapUsdt from './SwapUsdt.vue';
 import Account from './Account.vue';
+const userInfo = uni.getStorageSync(get_wx_user_info);
 export default {
 	components: {
 		Swap,
-		Account
+		Account,
+		SwapUsdt
 	},
 	data() {
 		return {
+			userInfo,
 			secret: false,
 			wallet: {},
 			account_info: false,
@@ -66,11 +80,15 @@ export default {
 					value: 1,
 					lable: '币币'
 				},
-
+				{
+					value: 16,
+					lable: '永续USDT保证金账户'
+				},
 				{
 					value: 3,
 					lable: '交割'
 				},
+
 				// {
 				// 	value: 4,
 				// 	lable: '法币'
@@ -94,15 +112,27 @@ export default {
 				{
 					value: 15,
 					lable: '交割USDT保证金账户'
-				},
-				{
-					value: 16,
-					lable: '永续USDT保证金账户'
 				}
 			]
 		};
 	},
 	computed: {
+		swap_account() {
+			let result = [];
+			if (this.cursor === 9) {
+				const data = this.account_info.info;
+				if (Array.isArray(this.account_info.info)) result = data.filter(e => e.total_avail_balance > 0);
+			}
+			return result;
+		},
+		swap_usdt_account() {
+			let result = [];
+			if (this.cursor === 16) {
+				const data = this.account_info.info;
+				if (Array.isArray(this.account_info.info)) result = data.filter(e => e.total_avail_balance > 0);
+			}
+			return result;
+		},
 		statusBarHeight() {
 			const { statusBarHeight } = uni.getSystemInfoSync();
 			return statusBarHeight;
@@ -114,11 +144,23 @@ export default {
 	onTabItemTap() {
 		uni.vibrateShort();
 	},
-	onLoad() {
+	onShow() {
 		this.fetch_asset_valuation();
 		this.handle_async_asset({ value: this.cursor });
+		uni.getUserInfo({
+			provider: 'weixin',
+			success: function(res) {
+				console.log(res);
+				if (res) {
+					uni.setStorageSync(get_wx_user_info, res);
+				}
+			}
+		});
 	},
 	methods: {
+		handle_login(res) {
+			uni.setStorageSync(get_wx_user_info, res.detail);
+		},
 		handle_async_asset(item) {
 			this.cursor = item.value;
 			uni.request({
@@ -128,9 +170,9 @@ export default {
 					account_type: item.value
 				},
 				success: res => {
-					console.log(res);
 					if (res.statusCode === 200) {
 						this.account_info = res.data;
+						uni.vibrateShort();
 					}
 				},
 				fail: () => {},

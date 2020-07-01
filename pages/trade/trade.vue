@@ -21,7 +21,7 @@
 			<scroll-view v-if="cursor === 3" scroll-y style="height: 100%;">
 				<view>
 					<Position v-if="trades.length > 0" v-for="(trade, index) in trades" :key="index" :trade="trade.holding"></Position>
-					<Empyt v-show="trades.length <= 0"></Empyt>
+					<Empyt v-if="trades.length <= 0"></Empyt>
 				</view>
 			</scroll-view>
 		</view>

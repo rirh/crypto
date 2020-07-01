@@ -19,7 +19,9 @@
         /* 模块配置 */
         "modules" : {
             "Payment" : {},
-            "Push" : {}
+            "Push" : {},
+            "OAuth" : {},
+            "Share" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -55,8 +57,11 @@
                 "UIUserInterfaceStyle" : "Automatic"
             },
             /* SDK配置 */
-            "sdkConfigs" : {}
-        }
+            "sdkConfigs" : {
+                "oauth" : {}
+            }
+        },
+        "nvueLaunchMode" : ""
     },
     /* 快应用特有相关 */
     "quickapp" : {},

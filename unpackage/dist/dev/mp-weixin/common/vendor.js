@@ -8570,6 +8570,7 @@ if (hadRuntime) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+
   biance: 'https://api.binance.com',
   // Apikey: '123',
   // Secretly: '123',
@@ -36186,8 +36187,9 @@ webpackContext.id = 47;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.get_position_swap = exports.get_asset_valuation = void 0;var get_asset_valuation = '0X001';exports.get_asset_valuation = get_asset_valuation;
+Object.defineProperty(exports, "__esModule", { value: true });exports.get_wx_user_info = exports.get_position_swap = exports.get_asset_valuation = void 0;var get_asset_valuation = '0X001';exports.get_asset_valuation = get_asset_valuation;
 var get_position_swap = '0X002';exports.get_position_swap = get_position_swap;
+var get_wx_user_info = '0X003';exports.get_wx_user_info = get_wx_user_info;
 
 /***/ })
 ]]);

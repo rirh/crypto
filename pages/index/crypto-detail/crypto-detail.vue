@@ -167,8 +167,6 @@ export default {
 		},
 		to_width(list, tag) {
 			const max = Math.max(...list.map(e => e[1]));
-			console.log(max);
-			console.log(`${((tag[1] / max) * 100).toFixed(2)}%`);
 			return `${((tag[1] / max) * 100).toFixed(2)}%`;
 		},
 		time_to_txt(time) {
@@ -235,7 +233,7 @@ export default {
 					// console.log(statusCode, data);
 					if (statusCode === 200) {
 						this.kline = data;
-						this.initcanvas();
+						// this.initcanvas();
 					}
 				}
 			});
