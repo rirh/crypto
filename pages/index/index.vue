@@ -47,7 +47,7 @@ export default {
 	components: {
 		Empty
 	},
-	onLoad() {
+	onShow() {
 		this.get_list();
 		this.merge_list();
 	},
@@ -169,7 +169,7 @@ export default {
 							list[quote].push(data[i]);
 						}
 						this.cryptos = list;
-						const [,quote] = Object.keys(this.cryptos);
+						const [, quote] = Object.keys(this.cryptos);
 						this.cur = quote;
 						// this.show=true
 					}
@@ -205,13 +205,13 @@ page {
 	flex-wrap: nowrap;
 	overflow-y: scroll;
 	width: 750rpx;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 	background-color: $color-bg;
 
 	.item {
 		margin: 0 5rpx;
 		color: $color-text-sub;
-		height: 80rpx;
+		height: 70rpx;
 		font-size: $text-xl;
 		display: flex;
 		justify-content: center;

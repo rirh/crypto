@@ -43,10 +43,22 @@
 					<text>可用</text>
 					<text>冻结</text>
 				</view>
-				<view v-for="(account, i) in account_info" :key="i"><Account :account="account"></Account></view>
+
+				<view v-if="account_info.length" v-for="(account, i) in account_info" :key="i"><Account :account="account"></Account></view>
+				<Empty v-else></Empty>
 			</view>
-			<view v-else-if="cursor === 9" class="padding text-white" :key="j" v-for="(swap, j) in swap_account"><Swap :swap="swap"></Swap></view>
-			<view v-else-if="cursor === 16" class="padding text-white" :key="k" v-for="(swap, k) in swap_usdt_account"><SwapUsdt :swap="swap"></SwapUsdt></view>
+			<view v-else-if="cursor === 9">
+				<view v-if="swap_account.length" class="padding text-white" :key="j" v-for="(swap, j) in swap_account"><Swap :swap="swap"></Swap></view>
+				<Empty v-else></Empty>
+			</view>
+			<view class="" v-else-if="cursor === 16">
+				<view v-if="swap_usdt_account.length" class="padding text-white" :key="k" v-for="(swap, k) in swap_usdt_account"><SwapUsdt :swap="swap"></SwapUsdt></view>
+				<Empty v-else></Empty>
+			</view>
+			<view class="" v-else-if="cursor === 3">{{ JSON.stringify(account_info) }}</view>
+			<view class="" v-else-if="cursor === 5">{{ JSON.stringify(account_info) }}</view>
+			<view class="" v-else-if="cursor === 6">{{ JSON.stringify(account_info) }}</view>
+			<view class="" v-else-if="cursor === 15">{{ JSON.stringify(account_info) }}</view>
 		</scroll-view>
 	</view>
 </template>
@@ -57,12 +69,14 @@ import { get_asset_valuation, get_wx_user_info } from 'constant';
 import Swap from './Swap.vue';
 import SwapUsdt from './SwapUsdt.vue';
 import Account from './Account.vue';
+import Empty from 'components/empty.vue';
 const userInfo = uni.getStorageSync(get_wx_user_info);
 export default {
 	components: {
 		Swap,
 		Account,
-		SwapUsdt
+		SwapUsdt,
+		Empty
 	},
 	data() {
 		return {

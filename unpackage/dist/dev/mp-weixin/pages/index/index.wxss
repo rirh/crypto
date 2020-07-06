@@ -57,13 +57,13 @@ page.data-v-57280228 {
           flex-wrap: nowrap;
   overflow-y: scroll;
   width: 750rpx;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   background-color: #1b1c1e;
 }
 .header .item.data-v-57280228 {
   margin: 0 5rpx;
   color: #c6c6c6;
-  height: 80rpx;
+  height: 70rpx;
   font-size: 28rpx;
   display: -webkit-box;
   display: -webkit-flex;

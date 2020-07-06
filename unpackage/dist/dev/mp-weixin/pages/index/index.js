@@ -203,7 +203,7 @@ var _pako = _interopRequireDefault(__webpack_require__(/*! pako */ 21));function
   components: {
     Empty: Empty },
 
-  onLoad: function onLoad() {
+  onShow: function onShow() {
     this.get_list();
     this.merge_list();
   },

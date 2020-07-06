@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/uni-drawer/uni-drawer":1,"pages/trade/Order":1};
+/******/ 		var cssChunks = {"components/uni-drawer/uni-drawer":1,"pages/trade/Open":1,"pages/trade/Order":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/empty":"components/empty","components/uni-drawer/uni-drawer":"components/uni-drawer/uni-drawer","pages/trade/Close":"pages/trade/Close","pages/trade/Open":"pages/trade/Open","pages/trade/Order":"pages/trade/Order","pages/trade/Postions":"pages/trade/Postions","pages/wallet/Account":"pages/wallet/Account","pages/wallet/Swap":"pages/wallet/Swap","pages/wallet/SwapUsdt":"pages/wallet/SwapUsdt","pages/trade/Holding":"pages/trade/Holding"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/empty":"components/empty","components/uni-drawer/uni-drawer":"components/uni-drawer/uni-drawer","pages/trade/Close":"pages/trade/Close","pages/trade/Open":"pages/trade/Open","pages/trade/Order":"pages/trade/Order","pages/trade/Postions":"pages/trade/Postions","pages/wallet/Account":"pages/wallet/Account","pages/wallet/Swap":"pages/wallet/Swap","pages/wallet/SwapUsdt":"pages/wallet/SwapUsdt","pages/trade/OrderItem":"pages/trade/OrderItem","pages/trade/Holding":"pages/trade/Holding"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

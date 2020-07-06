@@ -7,7 +7,11 @@
 				</view>
 				<view style="width: 50%;" class="text-center text-white" @click="showModal($event, 'type')" data-target="viewModal">type:&nbsp;{{ query.type || 'all' }}</view>
 			</view>
-			<Empty v-show="order_arr.length <= 0"></Empty>
+			<Empty v-if="order_arr.length <= 0"></Empty>
+			<view v-else class="">
+				<view v-for="order in order_arr" :key="order.client_oid" class=""><OrderItem @on-revoke="handle_cancel(order)" :params="order"></OrderItem></view>
+			</view>
+
 			<!-- <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
 				<view class="cu-item arrow" v-for="(item, index) in 20" :key="index">
 					<view class="content">
@@ -49,9 +53,11 @@
 <script>
 import config from 'config';
 import Empty from 'components/empty.vue';
+import OrderItem from './OrderItem.vue';
 export default {
 	components: {
-		Empty
+		Empty,
+		OrderItem
 	},
 	data() {
 		return {
@@ -66,20 +72,12 @@ export default {
 			instrument_arr: [],
 			types_arr: [
 				{
-					value: -2,
-					lable: 'fail order'
-				},
-				{
-					value: -1,
-					lable: 'recalled success order'
-				},
-				{
 					value: 0,
 					lable: 'wait success order'
 				},
 				{
-					value: 1,
-					lable: 'par success order'
+					value: -1,
+					lable: 'recalled success order'
 				},
 				{
 					value: 2,
@@ -89,6 +87,16 @@ export default {
 					value: 3,
 					lable: 'ordering'
 				},
+				{
+					value: -2,
+					lable: 'fail order'
+				},
+
+				{
+					value: 1,
+					lable: 'par success order'
+				},
+
 				{
 					value: 4,
 					lable: 'recalling'
@@ -102,7 +110,7 @@ export default {
 					lable: 'complate order'
 				}
 			],
-			tabcur: 0,
+			tabcur: 1,
 			order_arr: []
 		};
 	},
@@ -112,6 +120,25 @@ export default {
 	methods: {
 		init() {
 			this.fetch_instruments();
+		},
+		handle_cancel(params) {
+			uni.request({
+				url: `${config.host}/app/revoke_order/`,
+				method: 'GET',
+				data: {
+					client_oid: params.client_oid
+				},
+				success: res => {
+					if (res.statusCode === 200) {
+						console.log(res);
+						this.fetch_order_list();
+					}
+				},
+				fail: () => {},
+				complete: () => {
+					uni.hideLoading();
+				}
+			});
 		},
 		handle_set_margined(i) {
 			this.tabcur = i;
@@ -152,6 +179,7 @@ export default {
 				},
 				success: res => {
 					if (res.statusCode === 200) {
+						console.log(res);
 						this.order_arr = res.data[0].order_info;
 					}
 				},
@@ -168,7 +196,7 @@ export default {
 				data: {},
 				success: res => {
 					if (res.statusCode === 200) {
-						this.instrument_arr = res.data.map(e => ({ ...e, type: `${e.underlying_index}-${this.tabcur === 0 ? 'USD' : 'USDT'}` }));
+						this.instrument_arr = res.data.map(e => ({ ...e, type: `${e.underlying_index}-${this.tabcur === 0 ? 'USD' : 'USDT'}` })).reverse();
 						this.query.instrument_id = this.instrument_arr[0].type;
 						this.query.type = this.types_arr[0].lable;
 						this.query.state = this.types_arr[0].value;

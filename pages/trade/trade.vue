@@ -50,7 +50,7 @@ export default {
 	},
 	data() {
 		return {
-			cursor: 2,
+			cursor: 0,
 			type_arr: [
 				{
 					lable: 'Open',
@@ -127,7 +127,7 @@ export default {
 
 <style lang="scss" scoped>
 .types {
-	border-bottom: 1rpx solid #000;
+	border-bottom: 1rpx solid rgba($color: #000000, $alpha: 0.5);
 }
 .contant {
 	position: fixed;
