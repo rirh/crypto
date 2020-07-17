@@ -4,12 +4,21 @@
 			<text class="text-white">Instrument</text>
 			<text class="text-white text-bold">{{ form.instrument_id }}</text>
 		</view>
+		<view class="padding-left padding-right padding-bottom">
+			<input
+				class="price padding-left text-lg text-bold shadow"
+				auto-focus
+				:placeholder="`${type_arr.find(e => e.value === form.type).label} price`"
+				type="number"
+				:value="form.price"
+			/>
+		</view>
 		<view class="flex justify-between align-center padding">
 			<view
 				class="text-gray"
 				v-for="type in type_arr"
 				:key="type.value"
-				:class="[`${type.value === form.type && 'bg-blue cu-tag text-white'}`]"
+				:class="[`${type.value === form.type && 'cu-tag text-white tag'}`, type.value === form.type && (form.type < 3 ? 'bg-blue' : 'bg-red')]"
 				@click="handle_change_type(type)"
 			>
 				<text>{{ type.label }}</text>
@@ -21,21 +30,13 @@
 				class="text-gray"
 				v-for="order in order_type_arr"
 				:key="order.value"
-				:class="[`${order.value === form.order_type && 'bg-blue cu-tag text-white'}`]"
+				:class="[`${order.value === form.order_type && 'cu-tag text-white tag bg-blue'}`]"
 				@click="handle_change_order_type(order)"
 			>
 				<text>{{ order.label }}</text>
 			</view>
 		</view>
-		<view class="padding-left padding-right padding-bottom">
-			<input
-				class="price padding-left text-lg text-bold shadow"
-				auto-focus
-				:placeholder="`${type_arr.find(e => e.value === form.type).label} price`"
-				type="number"
-				:value="form.price"
-			/>
-		</view>
+		
 		<view class="flex justify-between align-center padding-left padding-right padding-bottom ">
 			<text class="text-white">Match Price</text>
 			<switch class="blue" @change="handle_change_match_price" :class="form.match_price === '1' ? 'checked' : ''" :checked="form.match_price === '1' ? true : false"></switch>
@@ -123,9 +124,11 @@ export default {
 			this.form.match_price = e.detail.value ? '1' : '0';
 		},
 		handle_change_order_type(order) {
+			uni.vibrateShort();
 			this.form.order_type = order.value;
 		},
 		handle_change_type(type) {
+			uni.vibrateShort();
 			this.form.type = type.value;
 		},
 		handle_take_order() {
@@ -163,5 +166,8 @@ export default {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+}
+.tag {
+	border-radius: 10rpx;
 }
 </style>

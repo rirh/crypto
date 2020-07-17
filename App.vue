@@ -1,6 +1,9 @@
 <script>
 export default {
 	onLaunch: function() {
+		uni.navigateTo({
+			url: '/pages/auth/auth'
+		});
 		console.log('App Launch');
 	},
 	onShow: function() {

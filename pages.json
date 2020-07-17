@@ -81,6 +81,15 @@
 			}
 		}
 
+		, {
+			"path": "pages/auth/auth",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#1b1c1e",
+				// "navigationStyle": "custom",
+				"navigationBarTextStyle": "white"
+			}
+		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -48,6 +48,7 @@ export default {
 		Empty
 	},
 	onShow() {
+		
 		this.get_list();
 		this.merge_list();
 	},
